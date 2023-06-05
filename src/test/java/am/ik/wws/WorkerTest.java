@@ -21,6 +21,7 @@ import java.io.PrintStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import am.ik.wws.Request.Method;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +36,7 @@ class WorkerTest {
 				new PrintStream(out));
 		worker.doServe(req -> {
 			assertThat(req.url()).isEqualTo(URI.create("/hello"));
-			assertThat(req.method()).isEqualTo("GET");
+			assertThat(req.method()).isEqualTo(Method.GET);
 			assertThat(req.headers()).containsOnlyKeys("host", "user-agent", "accept");
 			assertThat(req.header("host")).isEqualTo("127.0.0.1:8080");
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");
@@ -56,7 +57,7 @@ class WorkerTest {
 				new PrintStream(out));
 		worker.doServe(req -> {
 			assertThat(req.url()).isEqualTo(URI.create("/hello"));
-			assertThat(req.method()).isEqualTo("POST");
+			assertThat(req.method()).isEqualTo(Method.POST);
 			assertThat(req.headers()).containsOnlyKeys("host", "user-agent", "accept", "content-type");
 			assertThat(req.header("host")).isEqualTo("127.0.0.1:8080");
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");
@@ -78,7 +79,7 @@ class WorkerTest {
 				new PrintStream(out));
 		worker.doServe(req -> {
 			assertThat(req.url()).isEqualTo(URI.create("/hello/100"));
-			assertThat(req.method()).isEqualTo("GET");
+			assertThat(req.method()).isEqualTo(Method.GET);
 			assertThat(req.headers()).containsOnlyKeys("host", "user-agent", "accept");
 			assertThat(req.header("host")).isEqualTo("127.0.0.1:8080");
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");
@@ -100,7 +101,7 @@ class WorkerTest {
 		worker.doServe((req, cache) -> {
 			int counter = cache.get("counter").map(Integer::parseInt).orElse(0);
 			assertThat(req.url()).isEqualTo(URI.create("/counter"));
-			assertThat(req.method()).isEqualTo("POST");
+			assertThat(req.method()).isEqualTo(Method.POST);
 			assertThat(req.headers()).containsOnlyKeys("host", "user-agent", "accept", "content-type");
 			assertThat(req.header("host")).isEqualTo("127.0.0.1:8080");
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");
@@ -125,7 +126,7 @@ class WorkerTest {
 		worker.doServe((req, cache) -> {
 			int counter = cache.get("counter").map(Integer::parseInt).orElse(0);
 			assertThat(req.url()).isEqualTo(URI.create("/counter"));
-			assertThat(req.method()).isEqualTo("POST");
+			assertThat(req.method()).isEqualTo(Method.POST);
 			assertThat(req.headers()).containsOnlyKeys("host", "user-agent", "accept", "content-type");
 			assertThat(req.header("host")).isEqualTo("127.0.0.1:8080");
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");

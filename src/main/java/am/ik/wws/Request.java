@@ -23,9 +23,15 @@ import am.ik.json.JsonObject;
 
 public class Request {
 
+	public enum Method {
+
+		GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS
+
+	}
+
 	private final URI url;
 
-	private final String method;
+	private final Method method;
 
 	private final Map<String, String> headers;
 
@@ -33,7 +39,7 @@ public class Request {
 
 	private final Map<String, String> routeParams;
 
-	public Request(URI url, String method, Map<String, String> headers, String body, Map<String, String> routeParams) {
+	public Request(URI url, Method method, Map<String, String> headers, String body, Map<String, String> routeParams) {
 		this.url = url;
 		this.method = method;
 		this.headers = headers;
@@ -45,7 +51,8 @@ public class Request {
 		final JsonObject headers = json.get("headers").asObject();
 		final JsonObject params = json.get("params").asObject();
 		final String url = json.get("url").asString();
-		return new Request(URI.create(url == null ? "" : url), json.get("method").asString(),
+		final String method = json.get("method").asString();
+		return new Request(URI.create(url == null ? "" : url), method == null ? null : Method.valueOf(method),
 				Collections.unmodifiableMap(Worker.objectToMap(headers)), json.get("body").asString(),
 				Collections.unmodifiableMap(Worker.objectToMap(params)));
 	}
@@ -54,7 +61,7 @@ public class Request {
 		return this.url;
 	}
 
-	public String method() {
+	public Method method() {
 		return this.method;
 	}
 
