@@ -70,8 +70,8 @@ public class Request {
 		return this.headers;
 	}
 
-	public String header(String name) {
-		return this.headers.get(name);
+	public Optional<String> header(String name) {
+		return Optional.ofNullable(this.headers.get(name));
 	}
 
 	public String body() {
