@@ -20,9 +20,12 @@ import am.ik.wws.Worker;
 
 public class Main {
 	public static void main(String[] args) {
-		Worker.serve(req -> Response.status(200)
-				.header("X-Generated-By", "wasm-workers-server")
-				.data("Hey! The parameter is: " + req.routeParam("id"))
-				.build());
+		Worker.serve(req -> {
+			String id = req.routeParam("id");
+			return Response.status(200)
+					.header("X-Generated-By", "wasm-workers-server")
+					.data("Hey! The parameter is: " + id)
+					.build();
+		});
 	}
 }
