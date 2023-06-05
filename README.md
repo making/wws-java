@@ -83,6 +83,59 @@ public class Main {
 
 See [here](./samples/dynamic-routing) for the full source code
 
-### License
+## Run your worker with `wws`
+
+```
+git clone https://github.com/making/wws-java
+./wws-java/samples/hello-wasm/run.sh
+./wws-java/samples/key-value/run.sh
+./wws-java/samples/dynamic-routing/run.sh
+
+mkdir -p worker/app/hello
+cp wws-java/samples/hello-wasm/target/generated/wasm/teavm-wasm/hello.wasm worker/app/index.wasm
+cp wws-java/samples/key-value/target/generated/wasm/teavm-wasm/key-value.wasm worker/app
+cp wws-java/samples/dynamic-routing/target/generated/wasm/teavm-wasm/\[id\].wasm worker/app/hello
+
+cat <<EOF > worker/app/key-value.toml
+name = "key-value"
+version = "1"
+
+[data]
+[data.kv]
+namespace = "key-value"
+EOF
+
+cd worker
+wws app
+```
+
+```
+⚙️  Loading routes from: app
+⏳ Loading workers from 3 routes...
+✅ Workers loaded in 143.659922ms.
+    - http://127.0.0.1:8080/
+      => app/index.wasm
+    - http://127.0.0.1:8080/key-value
+      => app/key-value.wasm
+    - http://127.0.0.1:8080/hello/[id]
+      => app/hello/[id].wasm
+🚀 Start serving requests at http://127.0.0.1:8080
+```
+
+
+```
+$ curl http://127.0.0.1:8080
+Hello wasm! 
+$ curl http://127.0.0.1:8080/key-value
+Counter: 1 
+$ curl http://127.0.0.1:8080/key-value
+Counter: 2
+$ curl http://127.0.0.1:8080/hello/100
+Hey! The parameter is: 100
+$ curl http://127.0.0.1:8080/hello/200
+Hey! The parameter is: 200
+```
+
+## License
 
 Licensed under the Apache License, Version 2.0.
