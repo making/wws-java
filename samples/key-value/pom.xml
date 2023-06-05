@@ -52,7 +52,7 @@
 							<mainClass>com.example.Main</mainClass>
 							<debugInformationGenerated>false</debugInformationGenerated>
 							<minifying>true</minifying>
-							<optimizationLevel>FULL</optimizationLevel>
+							<optimizationLevel>SIMPLE</optimizationLevel>
 							<targetFileName>key-value.wasm</targetFileName>
 						</configuration>
 					</execution>

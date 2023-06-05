@@ -10,6 +10,8 @@ Unofficial Java SDK for [Wasm Workers Server](https://workers.wasmlabs.dev)
 </dependency>
 ```
 
+> ⚠️ `optimizationLevel` of the teavm-maven-plugin must be `SIMPLE`
+
 ## Your first Java worker
 
 Equivalent to https://workers.wasmlabs.dev/docs/languages/rust#your-first-rust-worker
