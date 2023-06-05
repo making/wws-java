@@ -49,6 +49,14 @@ jobs:
         gpg-passphrase: ${{ steps.secrets.outputs.GPG_PASSPHRASE }}
     - name: Unit Tests
       run: ./mvnw -V --no-transfer-progress clean test
+    - name: Set up wasmtime
+      run: curl https://wasmtime.dev/install.sh -sSf | bash
+    - name: Integration Tests
+      run: |
+        export PATH=${HOME}/.wasmtime/bin:${PATH}
+        ./samples/hello-wasm/run.sh
+        ./samples/dynamic-routing/run.sh
+        ./samples/key-value/run.sh
     - name: Deploy to sonatype-snapshots
       if: github.ref == 'refs/heads/develop'
       run: |
