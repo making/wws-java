@@ -6,7 +6,7 @@ Unofficial Java SDK for [Wasm Workers Server](https://workers.wasmlabs.dev) work
 <dependency>
 	<groupId>am.ik.wws</groupId>
 	<artifactId>wws-java</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 </dependency>
 ```
 
