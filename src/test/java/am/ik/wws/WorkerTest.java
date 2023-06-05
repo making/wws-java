@@ -85,7 +85,7 @@ class WorkerTest {
 			assertThat(req.header("user-agent")).isEqualTo("curl/7.88.1");
 			assertThat(req.header("accept")).isEqualTo("*/*");
 			assertThat(req.body()).isEmpty();
-			assertThat(req.routeParam("id")).isEqualTo("100");
+			assertThat(req.routeParam("id").get()).isEqualTo("100");
 			return Response.status(200).header("x-generated-by", "wasm-workers-server").data("Hello wasm!").build();
 		});
 		assertThat(out.toString()).isEqualTo(

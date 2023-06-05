@@ -18,6 +18,7 @@ package am.ik.wws;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 import am.ik.json.JsonObject;
 
@@ -81,8 +82,8 @@ public class Request {
 		return this.routeParams;
 	}
 
-	public String routeParam(String name) {
-		return this.routeParams.get(name);
+	public Optional<String> routeParam(String name) {
+		return Optional.ofNullable(this.routeParams.get(name));
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import am.ik.wws.Worker;
 public class Main {
 	public static void main(String[] args) {
 		Worker.serve(req -> {
-			String id = req.routeParam("id");
+			String id = req.routeParam("id").orElse(null);
 			return Response.status(200)
 					.header("X-Generated-By", "wasm-workers-server")
 					.data("Hey! The parameter is: " + id)
