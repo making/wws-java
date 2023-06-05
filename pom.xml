@@ -6,7 +6,7 @@
 
 	<groupId>am.ik.wws</groupId>
 	<artifactId>wws-java</artifactId>
-	<version>0.1.2</version>
+	<version>0.1.3-SNAPSHOT</version>
 	<name>wws-java</name>
 	<description>Java SDK for Wasm Workers Server</description>
 
