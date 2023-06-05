@@ -23,12 +23,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import am.ik.json.Json;
-import am.ik.json.JsonNode;
 import am.ik.json.JsonObject;
 
 public class Worker {
@@ -92,11 +90,7 @@ public class Worker {
 			return new LinkedHashMap<>();
 		}
 		final Map<String, String> map = new HashMap<>();
-		for (Entry<String, JsonNode> entry : object.asMap().entrySet()) {
-			String k = entry.getKey();
-			JsonNode v = entry.getValue();
-			map.put(k, v.asString());
-		}
+		object.asMap().forEach((k, v) -> map.put(k, v.asString()));
 		return map;
 	}
 
@@ -105,9 +99,7 @@ public class Worker {
 			return new JsonObject();
 		}
 		final JsonObject object = new JsonObject();
-		for (Entry<String, String> entry : map.entrySet()) {
-			object.put(entry.getKey(), entry.getValue());
-		}
+		map.forEach(object::put);
 		return object;
 	}
 
