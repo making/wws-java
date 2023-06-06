@@ -1,4 +1,4 @@
-# www-java
+# wws-java
 
 Unofficial Java SDK for [Wasm Workers Server](https://workers.wasmlabs.dev) works with [teavm-wasi](https://github.com/fermyon/teavm-wasi)
 
