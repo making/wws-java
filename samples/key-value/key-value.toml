@@ -1,0 +1,6 @@
+name = "key-value"
+version = "1"
+
+[data]
+[data.kv]
+namespace = "key-value"
